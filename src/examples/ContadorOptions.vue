@@ -13,7 +13,7 @@ export default {
     },
     decrease() {
       this.count--;
-    },
+    }
   },
   mounted(){
     console.log("El valor inicial del contador es:", this.count);
@@ -22,12 +22,13 @@ export default {
 </script>
 
 <template>
+  <p>Óbjetivo: Tienes que llegar a 100 clicks</p>
+
   <h1>Contador: {{ count }}</h1>
   <button @click="increase">Aumenta Contador</button>
   <button @click="decrease">Reduce Contador</button>
   <p>{{ name }} - {{ description }}</p>
 
+  <p v-if="count <= 10">Vamos tú puedes!</p>
+  <p v-else>Ya te falta muy poco...</p>
 </template>
-
-//Options API form basic 
-// si quiere usar la logica este es el estandar
