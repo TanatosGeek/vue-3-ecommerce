@@ -1,6 +1,8 @@
 <script lang="ts">
 import type { PropType } from 'vue';
 import type { Product } from '../model/types.ts';
+import { useCartStore } from '../stores/cart.ts';
+import { id } from 'vuetify/locale';
 
 export default{
     props:{
@@ -9,11 +11,10 @@ export default{
             required: true
         }
     },
-    emits:['addProduct'],
     methods:{
         onAddBunttonClick(){
-            //console.log("Agregado al carrito " + this.product.id)
-            this.$emit('addProduct')
+            const cartStore = useCartStore();
+            cartStore.addProduct(this.product.id);
         }
     }
 }
