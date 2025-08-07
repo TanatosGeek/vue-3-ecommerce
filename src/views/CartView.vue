@@ -1,13 +1,13 @@
-<script>
-import Cart from '../components/Cart.vue';
+<script lang="ts">
+import ShoppingCart from '@/components/ShoppingCart.vue';
 
 export default{
     components: {
-        Cart
+        ShoppingCart
     }
 }
 </script>
 
 <template>
-    <Cart />
+    <ShoppingCart />
 </template>

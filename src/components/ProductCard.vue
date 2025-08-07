@@ -2,7 +2,6 @@
 import type { PropType } from 'vue';
 import type { Product } from '../model/types.ts';
 import { useCartStore } from '../stores/cart.ts';
-import { id } from 'vuetify/locale';
 
 export default{
     props:{

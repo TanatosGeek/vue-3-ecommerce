@@ -1,12 +1,10 @@
 <script lang="ts">
 import type { Product } from '../model/types.ts';
 import ProductCard from '../components/ProductCard.vue'
-import Cart from '../components/Cart.vue';
 
 export default{
   components:{
-    ProductCard,
-    Cart
+    ProductCard
   },
   props: ['details'],
   data() {
@@ -20,11 +18,6 @@ export default{
         {id:3, name: 'Micrófono',price:20}
       ]
     }
-  },
-  methods:{
-    onProductAdded(productId: number){
-
-    }
   }
 }
 </script>
@@ -32,10 +25,10 @@ export default{
 
 <template>
   <v-row>
-    <v-col v-for="p in products" cols="4">
+    <v-col v-for="p in products" :key="p.id" cols="4">
       <ProductCard 
         :product="p"
-        @addProduct="onProductAdded(p.id)" />
+        />
     </v-col>
   </v-row>
 </template>
