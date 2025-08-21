@@ -2,15 +2,17 @@
 import type { Category } from '@/model/types';
 
 export default {
-    data() {
+    data(): {categories: Category[]} {
         return {
-            categories: <Array<Category>>[{
+            categories:[{
                 id:1,
-                name: 'Technology'
+                name: 'Oficina',
+                description: 'Productos para tu oficina'
             },
             {
                 id:2,
-                name: 'Toys'
+                name: 'Computadora',
+                description: 'Accesorios para computadora'
             }
         ]
         };
@@ -21,7 +23,7 @@ export default {
 <template>
     <v-sheet rounded="lg">
         <v-list rounded="lg">
-            <v-list-item v-for="category in categories" 
+            <v-list-item v-for="category in categories"
             :key="category.id" link>
             <v-list-item-title>
                 {{ category.name }}
