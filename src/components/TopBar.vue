@@ -14,13 +14,13 @@ export default{
     <v-app-bar flat>
       <v-container class="mx-auto d-flex align-center justify-center">
         <v-avatar class="me-4 " color="grey-darken-1" size="32">
-          <v-img 
+          <v-img
             src="/public/favicon.ico"
           />
         </v-avatar>
 
         <RouterLink to="/" custom v-slot="{ navigate }">
-          <v-btn prepend-icon="mdi-home" :active="$route.name === 'home'" variant="text" @click="navigate">
+          <v-btn prepend-icon="mdi-home" :active="$route.name === 'home' || $route.name === 'category' " variant="text" @click="navigate">
             Home
           </v-btn>
         </RouterLink>
