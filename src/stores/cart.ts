@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { CartDetail } from '@/model/types';
+import type { CartDetail, Product } from '@/model/types';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({ 
@@ -12,35 +12,40 @@ export const useCartStore = defineStore('cart', {
         count += detail.quantity;
       });
       return count;
+    },
+    totalAmount: (state) => {
+      let total = 0;
+      state.details.forEach(d => {
+        total += d.product.price * d.quantity;
+      })
+      return total;
     }
   },
   actions: {
-    addProduct(productId : number) {
-      const detailFound =this.details.find(d => d.productId === productId);
+    addProduct(product : Product) {
+      const detailFound =this.details.find(d => d.product.id === product.id);
       
       if(detailFound){
           detailFound.quantity += 1;
       }else{
         this.details.push({
-          productId,
+          product,
           quantity:1
         });
       }
     },
     deleteProduct(productId : number){
-      const index = this.details.findIndex(d => d.productId === productId);
+      const index = this.details.findIndex(d => d.product.id === productId);
       this.details.splice(index , 1);
     },
     increment(productId : number){
-      const detailFound = this.details.find(d => d.productId === productId);
-
+      const detailFound =this.details.find(d => d.product.id === productId);
       if(detailFound ){
         detailFound.quantity += 1;
       }
     },
     decrement(productId : number){
-      const detailFound = this.details.find(d => d.productId === productId);
-
+      const detailFound =this.details.find(d => d.product.id === productId);
       if(detailFound){
         detailFound.quantity --;
 
