@@ -2,7 +2,8 @@ import type { Product } from "@/model/types";
 import { defineStore } from "pinia";
 
 export const useProductsStore = defineStore('product', {
-  state: () : {_products : Product[], categoryId : number | null} => ({
+  state: () : {_products : Product[], categoryId : number | null, order: string} => ({
+    order: '',
     categoryId: null,
     _products: [
         {
@@ -49,15 +50,36 @@ export const useProductsStore = defineStore('product', {
   }),
   getters: {
     products(state){
-      if(!state.categoryId){
-        return state._products;
+      let products = null;
+      //Filter
+      if(state.categoryId){
+        products =  state._products.filter(p => p.categoryId === state.categoryId);
+      }else{
+        products = state._products;
       }
-      return state._products.filter(p => p.categoryId === state.categoryId);
+      //Order
+      if(state.order === ''){
+        return products;
+      }
+
+      if(state.order === 'price'){
+        return products.sort((a,b) => a.price - b.price);
+      }
+
+      if(state.order === 'name'){
+        return products.sort((a, b) => a.name.localeCompare(b.name));
+      }
     }
   },
   actions: {
     selectCategory(categoryId: number){
       this.categoryId = categoryId;
+    },
+    orderByPrice(){
+      this.order = 'price';
+    },
+    orderByName(){
+      this.order = 'name';
     }
   }
 })
