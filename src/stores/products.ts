@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useProductsStore = defineStore('product', {
   state: () : {_products : Product[], categoryId : number | null, order: string} => ({
-    order: '',
+    order: 'price',
     categoryId: null,
     _products: [
         {
@@ -66,8 +66,16 @@ export const useProductsStore = defineStore('product', {
         return products.sort((a,b) => a.price - b.price);
       }
 
+      if(state.order === 'priceDesc'){
+        return products.sort((a,b) => b.price - a.price);
+      }
+
       if(state.order === 'name'){
         return products.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      if(state.order === 'nameDesc'){
+        return products.sort((a, b) => b.name.localeCompare(a.name));
       }
     }
   },
@@ -80,6 +88,12 @@ export const useProductsStore = defineStore('product', {
     },
     orderByName(){
       this.order = 'name';
+    },
+    orderByPriceDesc(){
+      this.order = 'priceDesc';
+    },
+    orderByNameDesc(){
+      this.order = 'nameDesc';
     }
   }
 })
