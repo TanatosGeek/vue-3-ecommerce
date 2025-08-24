@@ -17,7 +17,7 @@ import { mapState } from 'pinia';
       }
     },
     computed:{
-      ...mapState(useCategoriesStore,['categories'])
+      ...mapState(useCategoriesStore,['categories','loading'])
     },
   }
 </script>
@@ -30,15 +30,20 @@ import { mapState } from 'pinia';
     </v-list-item-title>
   </v-list-item>
 
-  <v-list-item
-    :active="$route.name === 'category' && Number($route.params.categoryId) === category.id"
-    v-for="category in categories"
-    :key="category.id"
-    link
-    @click="goToCategory(category.id)"
+  <v-skeleton-loader
+    :loading="loading"
+    type="list-item"
   >
-    <v-list-item-title>
-        {{ category.name }}
-    </v-list-item-title>
-  </v-list-item>
+    <v-list-item
+      :active="$route.name === 'category' && Number($route.params.categoryId) === category.id"
+      v-for="category in categories"
+      :key="category.id"
+      link
+      @click="goToCategory(category.id)"
+    >
+      <v-list-item-title>
+          {{ category.name }}
+      </v-list-item-title>
+    </v-list-item>
+  </v-skeleton-loader>
 </template>
