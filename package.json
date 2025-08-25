@@ -12,6 +12,7 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@vueuse/core": "^13.7.0",
     "pinia": "^3.0.3",
     "vue-router": "^4.5.1",
     "vuetify": "^3.9.2"

@@ -30,20 +30,17 @@ import { mapState } from 'pinia';
     </v-list-item-title>
   </v-list-item>
 
-  <v-skeleton-loader
-    :loading="loading"
-    type="list-item"
+  <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+
+  <v-list-item v-else
+    :active="$route.name === 'category' && Number($route.params.categoryId) === category.id"
+    v-for="category in categories"
+    :key="category.id"
+    link
+    @click="goToCategory(category.id)"
   >
-    <v-list-item
-      :active="$route.name === 'category' && Number($route.params.categoryId) === category.id"
-      v-for="category in categories"
-      :key="category.id"
-      link
-      @click="goToCategory(category.id)"
-    >
-      <v-list-item-title>
-          {{ category.name }}
-      </v-list-item-title>
-    </v-list-item>
-  </v-skeleton-loader>
+    <v-list-item-title>
+        {{ category.name }}
+    </v-list-item-title>
+  </v-list-item>
 </template>

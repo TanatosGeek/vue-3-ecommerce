@@ -26,16 +26,11 @@ export default {
   mounted(){
     console.log('mounted');
 
-    setTimeout(()=>{
-      const productsStore = useProductsStore();
-      productsStore.fetchProducts();
-    }, 4000);
+    const productsStore = useProductsStore();
+    productsStore.fetchProducts();
 
-    setTimeout(()=>{
-      const categoriesStore = useCategoriesStore();
-      categoriesStore.fetchCategories();
-    }, 2000);
-
+    const categoriesStore = useCategoriesStore();
+    categoriesStore.fetchCategories();
 
   }
 }
@@ -45,11 +40,11 @@ export default {
   <main>
 
     <v-row>
-      <v-col cols="2">
+      <v-col cols="12" sm="3" md="3" lg="2">
         <LeftMenu />
       </v-col>
 
-      <v-col cols="10">
+      <v-col cols="12" sm="9" md="9" lg="10">
         <ProductList />
       </v-col>
     </v-row>
